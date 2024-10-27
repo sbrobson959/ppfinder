@@ -1,0 +1,136 @@
+<script>
+	import { OctagonX } from 'lucide-svelte';
+	import { slide } from 'svelte/transition';
+	import PollingPlace from '../lib/PollingPlace.svelte';
+	import Autocomplete from '../lib/Autocomplete.svelte';
+	import { tick } from 'svelte';
+
+	const resultTest = {
+		// TODO del
+		place: {
+			name: null,
+			address: null,
+			lat: 36.1701763,
+			lon: -95.9997263
+		},
+		districts: {
+			long_precinct: 720047,
+			state_senate: 11,
+			us_congress: 1,
+			short_precinct: 47,
+			county: 'TULSA',
+			county_commissioner: 1,
+			state_house: 73
+		},
+		// polling_place: null,
+		polling_place: {
+			name: 'VERNON AME CHURCH',
+			address: '311 N GREENWOOD AVE, TULSA OK 74120',
+			lat: 36.1616147,
+			lon: -95.9862823
+		}
+	};
+
+	export let noPrecinctFound = false;
+	export let badGateway = false;
+	export let result = null;
+
+	$: window.result = result;
+
+	let addressSelected;
+	let geocode;
+	let imageLoading;
+
+	async function updateResult() {
+		addressSelected = false;
+		imageLoading = true;
+		await tick();
+		const { lat, lon } = geocode;
+		const url = `https://ppfinder.fly.dev/by_geocode?lat=${lat}&lon=${lon}`;
+		console.log(url);
+		const response = await fetch(url);
+		if (response.ok) {
+			try {
+				result = await response.json();
+                console.log(result);
+			} catch (error) {
+				noPrecinctFound = true;
+			}
+		} else {
+			badGateway = true;
+		}
+	}
+
+	$: if (addressSelected) {
+		updateResult();
+	}
+</script>
+
+<div class="mx-auto my-10 max-w-4xl">
+	<div class="mx-2 max-w-4xl rounded-xl border-2 border-zinc-200 bg-white p-6 text-2xl shadow-md">
+		<h1 class="text-3xl font-bold">Find your polling place for November 5.</h1>
+		<div class="my-5 flex">
+			<Autocomplete bind:addressSelected bind:geocode bind:imageLoading />
+		</div>
+		{#if noPrecinctFound}
+			<div transition:slide={{ duration: 300 }} class="my-5">
+				<div class="flex rounded-lg bg-red-100 p-4 text-lg">
+					<OctagonX class="my-auto mr-3.5 stroke-red-700" size="40" />
+					<p class="my-auto text-base font-medium">
+						We could not locate your precinct. Please use the <a
+							class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200 hover:decoration-2"
+							href="https://okvoterportal.okelections.us">Oklahoma Voter Portal</a
+						>
+						or call your
+						<a
+							href="https://oklahoma.gov/elections/about-us/county-election-boards/county-election-board-directory.html"
+							class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200 hover:decoration-2"
+							>local election board</a
+						> to find your polling place.
+					</p>
+				</div>
+			</div>
+		{/if}
+		{#if badGateway}
+			<div class="my-5" transition:slide={{ duration: 300 }}>
+				<div class="flex rounded-lg bg-red-100 p-4 text-lg">
+					<OctagonX class="my-auto mr-3.5 stroke-red-700" size="40" />
+					<p class="my-auto text-base font-medium">
+						The server returned a 502 Gateway Error. Please try again later. Contact <a
+							href="mailto:sam@terencecrutcherfoundation.org"
+							class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200 hover:decoration-2"
+							>Sam Robson</a
+						>
+						or call our office at
+						<a
+							href="tel:+15398571304"
+							class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200 hover:decoration-2"
+							>(539) 857-1304</a
+						> for further assistance.
+					</p>
+				</div>
+			</div>
+		{/if}
+		{#if result && result.polling_place}
+			<PollingPlace bind:result />
+		{:else if result}
+			<div class="flex rounded-lg bg-red-100 p-4 text-lg" transition:slide>
+				<OctagonX class="my-auto mr-3.5 stroke-red-700" size="40" />
+				<p class="my-auto text-base font-medium">
+					We could not locate your polling place. Please use the <a
+						class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200 hover:decoration-2"
+						href="https://okvoterportal.okelections.us">Oklahoma Voter Portal</a
+					>
+					or call your
+					<a
+						href="https://oklahoma.gov/elections/about-us/county-election-boards/county-election-board-directory.html"
+						class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200 hover:decoration-2"
+						>local election board</a
+					> to find your polling place.
+				</p>
+			</div>
+		{/if}
+	</div>
+</div>
+
+<!-- <p class="text-center text-zinc-600 text-sm">© 2024 Terence Crutcher Foundation</p> -->
