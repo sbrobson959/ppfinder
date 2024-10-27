@@ -11,11 +11,12 @@
 
 	let addressSelected;
 	let geocode;
-	let imageLoading;
+	let loading;
 
 	async function updateResult() {
+        noPrecinctFound = false;
 		addressSelected = false;
-		imageLoading = true;
+		loading = true;
 		await tick();
 		const { lat, lon } = geocode;
 		const url = `https://ppfinder.fly.dev/by_geocode?lat=${lat}&lon=${lon}`;
@@ -42,7 +43,7 @@
 	<div class="mx-2 max-w-4xl rounded-xl border-2 border-zinc-200 bg-white p-6 text-2xl shadow-md">
 		<h1 class="text-3xl font-bold">Find your Tulsa County polling place for the November 5 election.</h1>
 		<div class="my-5 flex">
-			<Autocomplete bind:addressSelected bind:geocode bind:imageLoading />
+			<Autocomplete bind:addressSelected bind:geocode />
 		</div>
 		{#if noPrecinctFound}
 			<div transition:slide={{ duration: 300 }} class="my-5">
@@ -84,7 +85,7 @@
 			</div>
 		{/if}
 		{#if result && result.polling_place}
-			<PollingPlace bind:result />
+			<PollingPlace bind:result bind:loading />
 		{:else if result}
 			<div class="flex rounded-lg bg-red-100 p-4 text-lg" transition:slide>
 				<OctagonX class="my-auto mr-3.5 stroke-red-700" size="40" />

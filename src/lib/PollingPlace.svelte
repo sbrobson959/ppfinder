@@ -16,8 +16,12 @@
 	<div class="sm:flex">
 		<div class="my-auto sm:w-1/2 md:mx-0 md:w-1/3">
 			{#if loading}
-				<div class="spinner mx-auto"></div>
-				<p class="mt-4 text-center text-sm text-zinc-700">Loading map...</p>
+				<div class="flex h-64">
+					<div class="m-auto">
+						<div class="spinner m-auto"></div>
+						<p class="mt-4 text-center text-sm text-zinc-700">Loading image...</p>
+					</div>
+				</div>
 			{/if}
 			<a href={googleMapsLink} style:display={loading ? 'none' : 'block'}>
 				<img
