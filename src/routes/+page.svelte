@@ -5,37 +5,9 @@
 	import Autocomplete from '../lib/Autocomplete.svelte';
 	import { tick } from 'svelte';
 
-	const resultTest = {
-		// TODO del
-		place: {
-			name: null,
-			address: null,
-			lat: 36.1701763,
-			lon: -95.9997263
-		},
-		districts: {
-			long_precinct: 720047,
-			state_senate: 11,
-			us_congress: 1,
-			short_precinct: 47,
-			county: 'TULSA',
-			county_commissioner: 1,
-			state_house: 73
-		},
-		// polling_place: null,
-		polling_place: {
-			name: 'VERNON AME CHURCH',
-			address: '311 N GREENWOOD AVE, TULSA OK 74120',
-			lat: 36.1616147,
-			lon: -95.9862823
-		}
-	};
-
 	export let noPrecinctFound = false;
 	export let badGateway = false;
 	export let result = null;
-
-	$: window.result = result;
 
 	let addressSelected;
 	let geocode;
