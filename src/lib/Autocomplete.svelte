@@ -50,7 +50,7 @@
 <input
 	bind:this={autocompleteInput}
 	type="text"
-	placeholder="Enter the address at which you are registered to vote"
+	placeholder="Enter address"
 	class="autocomplete-input"
 />
 

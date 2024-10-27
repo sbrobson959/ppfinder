@@ -38,9 +38,9 @@
 	}
 </script>
 
-<div class="mx-auto my-10 max-w-4xl">
+<div class="mx-auto my-6 max-w-4xl">
 	<div class="mx-2 max-w-4xl rounded-xl border-2 border-zinc-200 bg-white p-6 text-2xl shadow-md">
-		<h1 class="text-3xl font-bold">Find your polling place for November 5.</h1>
+		<h1 class="text-3xl font-bold">Find your Tulsa County polling place for the November 5 election.</h1>
 		<div class="my-5 flex">
 			<Autocomplete bind:addressSelected bind:geocode bind:imageLoading />
 		</div>
