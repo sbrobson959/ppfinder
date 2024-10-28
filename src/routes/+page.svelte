@@ -1,9 +1,34 @@
 <script>
 	import { OctagonX } from 'lucide-svelte';
 	import { slide } from 'svelte/transition';
-	import PollingPlace from '../lib/PollingPlace.svelte';
-	import Autocomplete from '../lib/Autocomplete.svelte';
+	import PollingPlace from '$lib/PollingPlace.svelte';
+	import Autocomplete from '$lib/Autocomplete.svelte';
+	import Districts from '$lib/Districts.svelte';
 	import { tick } from 'svelte';
+
+	const testResult = {
+		place: {
+			name: null,
+			address: null,
+			lat: 36.1701763,
+			lon: -95.9997263
+		},
+		districts: {
+			long_precinct: 720047,
+			state_senate: 11,
+			us_congress: 1,
+			short_precinct: 47,
+			county: 'TULSA',
+			county_commissioner: 1,
+			state_house: 73
+		},
+		polling_place: {
+			name: 'VERNON AME CHURCH',
+			address: '311 N GREENWOOD AVE, TULSA OK 74120',
+			lat: 36.1616147,
+			lon: -95.9862823
+		}
+	};
 
 	export let noPrecinctFound = false;
 	export let badGateway = false;
@@ -14,7 +39,7 @@
 	let loading;
 
 	async function updateResult() {
-        noPrecinctFound = false;
+		noPrecinctFound = false;
 		addressSelected = false;
 		loading = true;
 		await tick();
@@ -25,7 +50,7 @@
 		if (response.ok) {
 			try {
 				result = await response.json();
-                console.log(result);
+				console.log(result);
 			} catch (error) {
 				noPrecinctFound = true;
 			}
@@ -39,9 +64,11 @@
 	}
 </script>
 
-<div class="mx-auto my-6 max-w-4xl">
-	<div class="mx-2 max-w-4xl rounded-xl border-2 border-zinc-200 bg-white p-6 text-2xl shadow-md">
-		<h1 class="text-3xl font-bold">Find your Tulsa County polling place for the November 5 election.</h1>
+<div class="mx-auto my-6 max-w-5xl">
+	<div class="mx-2 max-w-5xl rounded-xl border-2 border-zinc-200 bg-white p-6 text-2xl shadow-md">
+		<h1 class="text-3xl font-bold">
+			Find your polling place for the November 5 election in Tulsa.
+		</h1>
 		<div class="my-5 flex">
 			<Autocomplete bind:addressSelected bind:geocode />
 		</div>
@@ -103,7 +130,12 @@
 				</p>
 			</div>
 		{/if}
+		{#if result}
+        <div transition:slide>
+			<Districts bind:result />
+        </div>
+		{/if}
 	</div>
 </div>
 
-<!-- <p class="text-center text-zinc-600 text-sm">© 2024 Terence Crutcher Foundation</p> -->
+<!-- <footer class="text-center text-sm text-zinc-500 mb-10">© 2024 Terence Crutcher Foundation</footer> -->
