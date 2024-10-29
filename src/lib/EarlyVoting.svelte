@@ -15,7 +15,7 @@
 <hr class="mb-5 mt-2 h-0.5 bg-zinc-100" />
 
 {#each result.early_voting as place}
-	<div class="my-10 flex">
+	<div class="my-10 sm:flex">
 		<div class="my-auto sm:w-1/3 md:mx-0 md:w-1/4">
 			{#await fetchImage(place)}
 				<div class="flex h-48">
