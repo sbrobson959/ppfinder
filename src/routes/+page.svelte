@@ -5,6 +5,7 @@
 	import Autocomplete from '$lib/Autocomplete.svelte';
 	import Districts from '$lib/Districts.svelte';
 	import { tick } from 'svelte';
+	import EarlyVoting from '../lib/EarlyVoting.svelte';
 
 	const testResult = {
 		place: {
@@ -132,6 +133,7 @@
 		{/if}
 		{#if result}
         <div transition:slide>
+            <EarlyVoting bind:result />
 			<Districts bind:result />
         </div>
 		{/if}
