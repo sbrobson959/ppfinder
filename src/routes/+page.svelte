@@ -1,3 +1,5 @@
+<title>Tulsa Polling Places</title>
+
 <script>
 	import { OctagonX } from 'lucide-svelte';
 	import { slide } from 'svelte/transition';
@@ -6,30 +8,6 @@
 	import Districts from '$lib/Districts.svelte';
 	import { tick } from 'svelte';
 	import EarlyVoting from '../lib/EarlyVoting.svelte';
-
-	const testResult = {
-		place: {
-			name: null,
-			address: null,
-			lat: 36.1701763,
-			lon: -95.9997263
-		},
-		districts: {
-			long_precinct: 720047,
-			state_senate: 11,
-			us_congress: 1,
-			short_precinct: 47,
-			county: 'TULSA',
-			county_commissioner: 1,
-			state_house: 73
-		},
-		polling_place: {
-			name: 'VERNON AME CHURCH',
-			address: '311 N GREENWOOD AVE, TULSA OK 74120',
-			lat: 36.1616147,
-			lon: -95.9862823
-		}
-	};
 
 	export let noPrecinctFound = false;
 	export let badGateway = false;
@@ -118,14 +96,14 @@
 			<div class="flex rounded-lg bg-red-100 p-4 text-lg" transition:slide>
 				<OctagonX class="my-auto mr-3.5 stroke-red-700" size="40" />
 				<p class="my-auto text-base font-medium">
-					We could not locate your polling place. Please use the <a
-						class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200 hover:decoration-2"
+					We do not have your polling place on record. Please use the <a
+						class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200"
 						href="https://okvoterportal.okelections.us">Oklahoma Voter Portal</a
 					>
 					or call your
 					<a
 						href="https://oklahoma.gov/elections/about-us/county-election-boards/county-election-board-directory.html"
-						class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200 hover:decoration-2"
+						class="underline decoration-1 underline-offset-4 transition-all hover:bg-red-200"
 						>local election board</a
 					> to find your polling place.
 				</p>

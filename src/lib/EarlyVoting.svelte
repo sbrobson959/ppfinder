@@ -29,7 +29,7 @@
 					<img src={imageUrl} alt="Early voting location map" class="max-h-56 rounded-md" /></a
 				>
 			{:catch error}
-				<p>{error}</p>
+				<p class="text-sm">Error loading image: {error}</p>
 			{/await}
 		</div>
 		<div class="my-auto mt-4 sm:my-auto sm:ml-6">
