@@ -23,7 +23,7 @@
 					</div>
 				</div>
 			{/if}
-			<a href={googleMapsLink} style:display={loading ? 'none' : 'block'}>
+			<a href={googleMapsLink} style:display={loading ? 'none' : 'inline-block'}>
 				<img
 					src={mapImageUrl}
 					alt="Map of polling place"

@@ -25,7 +25,7 @@
 					</div>
 				</div>
 			{:then imageUrl}
-				<a href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}>
+				<a href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`} class="inline-block">
 					<img src={imageUrl} alt="Early voting location map" class="max-h-56 rounded-md" /></a
 				>
 			{:catch error}
