@@ -12,7 +12,7 @@
 </script>
 
 <div transition:slide>
-	<h2 class="text-2xl font-bold mt-5">{$t('pollingPlace')}</h2>
+	<h2 class="mt-5 text-2xl font-bold">{$t('pollingPlace')}</h2>
 	<hr class="mb-5 mt-2 h-0.5 bg-zinc-100" />
 	<div class="sm:flex">
 		<div class="my-auto sm:w-1/3 md:mx-0 md:w-1/4">

@@ -84,7 +84,7 @@ export const translations = {
 		cantBeTurnedAway: 'Mientras estés en la fila antes de las 7 p.m., no te pueden negar el voto.',
 
 		// EarlyVoting.svelte
-		earlyVoting: 'Voto anticipado',
+		earlyVoting: 'Votando temprano',
 		earlyVotingLocationMap: 'Mapa del lugar de votación anticipada',
 		errorLoadingImage: 'Error al cargar la imagen',
 		earlyVotingHoursLine1: '30 de oct. al 1 de nov., de 8 a.m. a 6 p.m.',
