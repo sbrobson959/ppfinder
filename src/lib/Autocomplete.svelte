@@ -1,11 +1,12 @@
 <script>
 	import { onMount } from 'svelte';
 	import { PUBLIC_GOOGLE_MAPS_API_KEY } from '$env/static/public';
+	import { t } from '$lib/translate.svelte';
 
 	let autocompleteInput;
 	export let geocode = { lat: null, lon: null };
 	export let selectedAddress = '';
-    export let addressSelected = false;
+	export let addressSelected = false;
 
 	onMount(() => {
 		if (typeof google !== 'undefined') {
@@ -40,7 +41,7 @@
 					lon: place.geometry.location.lng()
 				};
 				selectedAddress = place.formatted_address;
-                 addressSelected = true;
+				addressSelected = true;
 			}
 		});
 	}
@@ -50,7 +51,7 @@
 <input
 	bind:this={autocompleteInput}
 	type="text"
-	placeholder="Enter address"
+	placeholder={$t('searchBarPlaceholder')}
 	class="autocomplete-input"
 />
 

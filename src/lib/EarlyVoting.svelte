@@ -1,4 +1,6 @@
 <script>
+	import { t } from '$lib/translate.svelte';
+
 	export let result;
 
 	async function fetchImage(place) {
@@ -11,7 +13,7 @@
 	}
 </script>
 
-<h2 class="mt-8 text-2xl font-bold">Early Voting</h2>
+<h2 class="mt-8 text-2xl font-bold">{$t('earlyVoting')}</h2>
 <hr class="mb-5 mt-2 h-0.5 bg-zinc-100" />
 
 {#each result.early_voting as place}
@@ -21,29 +23,34 @@
 				<div class="flex h-48">
 					<div class="m-auto">
 						<div class="spinner m-auto"></div>
-						<p class="mt-4 text-center text-sm text-zinc-700">Loading image...</p>
+						<p class="mt-4 text-center text-sm text-zinc-700">{$t('loadingImage')}</p>
 					</div>
 				</div>
 			{:then imageUrl}
-				<a href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`} class="inline-block">
-					<img src={imageUrl} alt="Early voting location map" class="max-h-56 rounded-md" /></a
+				<a
+					href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
+					class="inline-block"
+				>
+					<img src={imageUrl} alt={$t('earlyVotingLocationMap')} class="max-h-56 rounded-md" /></a
 				>
 			{:catch error}
-				<p class="text-sm">Error loading image: {error}</p>
+				<p class="text-sm">{$t('errorLoadingImage')}: {error}</p>
 			{/await}
 		</div>
 		<div class="my-auto mt-4 sm:my-auto sm:ml-6">
-			<p class="text-lg font-bold">Address:</p>
+			<p class="text-lg font-bold">{$t('address')}:</p>
 			<p class="text-lg">
 				<a
 					href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
 					class="underline underline-offset-4 transition-all duration-200 hover:bg-zinc-100"
-					title="Find polling place on Google Maps">{place.name}<br />{place.address}</a
+					title={$t('findOnGoogleMaps')}>{place.name}<br />{place.address}</a
 				>
 			</p>
 			<p class="mt-4 text-lg font-bold">
-				Hours:<br />
-				<span class="text-lg font-normal">8am-6pm, Oct. 30-Nov. 1<br />8am-2pm, Nov. 2</span>
+				{$t('hours')}:<br />
+				<span class="text-lg font-normal"
+					>{$t('earlyVotingHoursLine1')}<br />{$t('earlyVotingHoursLine2')}</span
+				>
 			</p>
 		</div>
 	</div>
