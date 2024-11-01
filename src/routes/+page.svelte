@@ -53,24 +53,24 @@
 		<div class="my-5 flex">
 			<Autocomplete bind:addressSelected bind:geocode />
 		</div>
-        <p class="text-sm text-center text-zinc-600 mt-4 ml-1">
-            <Earth class="inline stroke-zinc-500 -mt-px mr-1" size=19 />
-            <button
-                on:click={() => language.set('en')}
-                class="underline underline-offset-2 hover:underline-offset-4 transition-all duration-300 hover:bg-zinc-100"
-                >English</button
-            >
-            |
-            <button
-                on:click={() => language.set('es')}
-                class="underline underline-offset-2 hover:underline-offset-4 transition-all duration-300 hover:bg-zinc-100"
-                >Español</button
-            >
-        </p>
+		<p class="ml-1 text-center text-sm text-zinc-600">
+			<Earth class="-mt-px mr-1 inline stroke-zinc-500" size="19" />
+			<button
+				on:click={() => language.set('en')}
+				class="underline underline-offset-2 transition-all duration-300 hover:bg-zinc-100 hover:underline-offset-4"
+				>English</button
+			>
+			|
+			<button
+				on:click={() => language.set('es')}
+				class="underline underline-offset-2 transition-all duration-300 hover:bg-zinc-100 hover:underline-offset-4"
+				>Español</button
+			>
+		</p>
 		{#if noPrecinctFound}
 			<div transition:slide={{ duration: 300 }} class="my-5">
 				<div class="flex rounded-lg bg-red-100 p-4 text-lg">
-                    <OctagonX class="my-auto mr-3.5 w-20 stroke-red-700 sm:w-auto" size="40" />
+					<OctagonX class="my-auto mr-3.5 w-20 stroke-red-700 sm:w-auto" size="40" />
 					<p class="my-auto text-base font-medium">
 						{$t('couldNotLocatePrecinct', 'part1')}
 						<a
@@ -91,7 +91,7 @@
 		{#if badGateway}
 			<div class="my-5" transition:slide={{ duration: 300 }}>
 				<div class="flex rounded-lg bg-red-100 p-4 text-lg">
-                    <OctagonX class="my-auto mr-3.5 w-20 stroke-red-700 sm:w-auto" size="40" />
+					<OctagonX class="my-auto mr-3.5 w-20 stroke-red-700 sm:w-auto" size="40" />
 					<p class="my-auto text-base font-medium">
 						{$t('badGateway', 'part1')}
 						<a
@@ -138,5 +138,4 @@
 			</div>
 		{/if}
 	</div>
-
 </div>
