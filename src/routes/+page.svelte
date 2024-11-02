@@ -5,9 +5,7 @@
 	import PollingPlace from '$lib/PollingPlace.svelte';
 	import Autocomplete from '$lib/Autocomplete.svelte';
 	import Districts from '$lib/Districts.svelte';
-	import { tick } from 'svelte';
 	import EarlyVoting from '$lib/EarlyVoting.svelte';
-
 	import { language } from '$lib/stores.js';
 
 	export let noPrecinctFound = false;
@@ -22,9 +20,9 @@
 	async function updateResult() {
 		addressSelectedOnce = true;
 		noPrecinctFound = false;
+		badGateway = false;
 		addressSelected = false;
 		loading = true;
-		await tick();
 		const { lat, lon } = geocode;
 		const url = `https://ppfinder.fly.dev/by_geocode?lat=${lat}&lon=${lon}`;
 		const response = await fetch(url);
@@ -34,6 +32,7 @@
 				console.log(result);
 			} catch (error) {
 				noPrecinctFound = true;
+				result = null;
 			}
 		} else {
 			badGateway = true;
@@ -48,23 +47,18 @@
 <title>{$t('title')}</title>
 
 <div
-	class="mx-auto flex h-screen max-w-5xl items-center justify-center"
-	class:items-center={!addressSelectedOnce}
+	class="transition-translate mx-auto flex min-h-screen max-w-5xl items-center justify-center"
 	class:items-start={addressSelectedOnce}
 >
-	<div class="mx-auto bg-blue-50">
-		<div
-			class="m-4 max-w-5xl rounded-xl border-2 border-zinc-200 bg-white p-6 text-2xl shadow-md {addressSelectedOnce
-				? 'translate-y-0'
-				: '-translate-y-1/3'}"
-		>
+	<div class="mx-auto mb-20 bg-blue-50">
+		<div class="m-4 max-w-5xl rounded-xl border-2 border-zinc-200 bg-white p-6 text-2xl shadow-md">
 			<h1 class="text-3xl font-bold">
 				{$t('header')}
 			</h1>
 			<div class="my-5 flex">
 				<Autocomplete bind:addressSelected bind:geocode />
 			</div>
-			<p class="ml-1 text-center text-sm text-zinc-600">
+			<p class="text-center text-sm text-zinc-600" class:mb-4={addressSelectedOnce}>
 				<Earth class="-mt-px mr-1 inline stroke-zinc-500" size="19" />
 				<button
 					on:click={() => language.set('en')}

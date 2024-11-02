@@ -14,7 +14,7 @@
 <div transition:slide>
 	<h2 class="mt-5 text-2xl font-bold">{$t('pollingPlace')}</h2>
 	<hr class="mb-5 mt-2 h-0.5 bg-zinc-100" />
-	<div class="sm:flex">
+	<div class="my-10 sm:flex">
 		<div class="my-auto sm:w-1/3 md:mx-0 md:w-1/4">
 			{#if loading}
 				<div class="flex h-48">
@@ -28,7 +28,7 @@
 				<img
 					src={mapImageUrl}
 					alt={$t('mapOfPollingPlace')}
-					class=" max-h-56 rounded-md"
+					class="max-h-56 rounded-md"
 					on:load={() => (loading = false)}
 				/>
 			</a>
