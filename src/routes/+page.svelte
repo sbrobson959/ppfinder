@@ -7,6 +7,7 @@
 	import Districts from '$lib/Districts.svelte';
 	import EarlyVoting from '$lib/EarlyVoting.svelte';
 	import { language } from '$lib/stores.js';
+	import { tick } from 'svelte';
 
 	export let noPrecinctFound = false;
 	export let badGateway = false;
@@ -37,6 +38,9 @@
 		} else {
 			badGateway = true;
 		}
+
+		const container = document.querySelector('#main-container');
+		container?.scrollIntoView({ behavior: 'instant', block: 'start' });
 	}
 
 	$: if (addressSelected) {
@@ -46,9 +50,12 @@
 
 <title>{$t('title')}</title>
 
+<!-- <span id="top" /> -->
+
 <div
 	class="transition-translate mx-auto flex min-h-screen max-w-5xl items-center justify-center"
 	class:items-start={addressSelectedOnce}
+	id="main-container"
 >
 	<div class="mx-auto mb-20 bg-blue-50">
 		<div class="m-4 max-w-5xl rounded-xl border-2 border-zinc-200 bg-white p-6 text-2xl shadow-md">
