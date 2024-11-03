@@ -6,6 +6,6 @@
 	onMount(() => {
 		// Set language to Spanish and redirect to root
 		language.set('es');
-		goto('/');
+		goto('/?lang=es');
 	});
 </script>

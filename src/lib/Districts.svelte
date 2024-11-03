@@ -10,19 +10,19 @@
 	<table class=" grow text-lg font-medium">
 		<tbody>
 			<tr>
-				<td class="w-80 border-2 px-2">{$t('county')}</td>
+				<td class="border-2 px-2">{$t('county')}</td>
 				<td class="border-2 px-2 font-light">{result.districts.county}</td>
 			</tr>
 			<tr>
-				<td class="w-80 border-2 px-2">{$t('precinct')}</td>
+				<td class="border-2 px-2">{$t('precinct')}</td>
 				<td class="border-2 px-2 font-light">{result.districts.short_precinct}</td>
 			</tr>
 			<tr>
-				<td class="w-80 border-2 px-2">{$t('countyCommissionerDistrict')}</td>
+				<td class="border-2 px-2">{$t('countyCommissionerDistrict')}</td>
 				<td class="border-2 px-2 font-light">{result.districts.county_commissioner}</td>
 			</tr>
 			<tr>
-				<td class="w-80 border-2 px-2">{$t('stateHouseDistrict')}</td>
+				<td class="border-2 px-2">{$t('stateHouseDistrict')}</td>
 				<td class="border-2 px-2 font-light">{result.districts.state_house}</td>
 			</tr>
 			<tr>

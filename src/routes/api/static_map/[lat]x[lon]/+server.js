@@ -1,6 +1,14 @@
 import { GOOGLE_MAPS_API_KEY } from '$env/static/private';
 
 export async function GET({ params, url }) {
+
+	function sleep(ms) {
+		return new Promise((resolve) => setTimeout(resolve, ms));
+	}
+
+	await sleep(2000);
+
+
 	const { lat, lon } = params;
 	const zoom = url.searchParams.get('zoom') || '15';
 	const size = url.searchParams.get('size') || '600x400';
